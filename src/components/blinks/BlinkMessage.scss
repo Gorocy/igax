@@ -1,0 +1,117 @@
+.BlinkMessage {
+  width: 100%;
+  position: relative;
+  
+  &.expanded {
+    width: 100%;
+    height: auto !important;
+    min-height: auto !important;
+    max-height: none !important;
+    display: flex;
+    flex-direction: column;
+    
+    .blink-fullscreen {
+      flex: 1;
+      // TODO radius but need to style web page to match
+      // border-radius: 0.75rem;
+      overflow: visible !important;
+      border: 1px solid var(--color-borders);
+      height: auto !important;
+      min-height: auto !important;
+      max-height: none !important;
+      position: relative;
+      z-index: 5;
+    }
+  }
+  
+  .blink-preview {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    border-radius: 0.75rem;
+    overflow: hidden;
+    border: 1px solid var(--color-borders);
+    cursor: pointer;
+    transition: transform 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    background-color: var(--color-background);
+    
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+    
+    .blink-preview-content {
+      display: flex;
+      padding: 0.75rem;
+      
+      .blink-thumbnail {
+        width: 3.5rem;
+        height: 3.5rem;
+        border-radius: 0.5rem;
+        flex-shrink: 0;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-color: var(--color-background);
+      }
+      
+      .blink-icon {
+        width: 3.5rem;
+        height: 3.5rem;
+        border-radius: 0.5rem;
+        flex-shrink: 0;
+        background-color: var(--color-background);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--color-primary);
+        font-size: 1.75rem;
+      }
+      
+      .blink-info {
+        // margin-left: 0.75rem;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        
+        .blink-title {
+          font-weight: var(--font-weight-medium);
+          font-size: 1rem;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          margin-bottom: 0.25rem;
+        }
+        
+        .blink-description {
+          font-size: 0.875rem;
+          color: var(--color-text-secondary);
+          display: -webkit-box;
+          line-clamp: 2;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+          line-height: 1.3;
+          margin-bottom: 0.25rem;
+        }
+        
+        .blink-domain {
+          color: var(--color-text-meta);
+          font-size: 0.75rem;
+        }
+      }
+    }
+    
+    .blink-buttons {
+      display: flex;
+      padding: 0.75rem;
+      border-top: 1px solid var(--color-borders);
+      background-color: var(--color-background);
+      
+      .blink-open-button {
+        margin-left: auto;
+        min-width: 5rem;
+      }
+    }
+  }
+}

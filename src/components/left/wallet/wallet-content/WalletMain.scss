@@ -1,0 +1,298 @@
+.wallet-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  height: 100%;
+  gap: 1rem;
+}
+
+.wallet-connect {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 1rem;
+  text-align: center;
+
+  .wallet-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: var(--color-primary);
+  }
+
+  h3 {
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+  }
+
+  p {
+    margin-bottom: 1.5rem;
+    color: var(--color-text-secondary);
+  }
+
+  .wallet-connect-options {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+    max-width: 300px;
+
+    .button-icon {
+      margin-right: 0.5rem;
+    }
+  }
+
+  .wallet-network-info {
+    font-size: 0.875rem;
+    padding: 0.5rem;
+    background-color: var(--color-background);
+    border-radius: 0.5rem;
+    
+    .network-value {
+      font-weight: 500;
+      margin-left: 0.25rem;
+    }
+  }
+}
+
+.wallet-details {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow-y: auto;
+
+  .wallet-actions {
+    margin-bottom: 1rem;
+
+    .wallet-action-button {
+      width: 100%;
+      font-weight: 500;
+
+      .button-icon {
+        margin-right: 0.5rem;
+      }
+    }
+  }
+
+  .wallet-balance-overview {
+    margin-bottom: 1rem;
+    padding: 1rem;
+    background-color: var(--color-background-secondary);
+    border-radius: 0.75rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .wallet-info {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+
+      .wallet-address {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        font-family: monospace;
+        color: var(--color-text-secondary);
+        
+        .copy-icon {
+          margin-left: 0.5rem;
+          opacity: 0.7;
+        }
+        
+        &:hover {
+          color: var(--color-primary);
+          
+          .copy-icon {
+            opacity: 1;
+          }
+        }
+      }
+
+      .wallet-menu-button {
+        font-size: 1.25rem;
+        color: var(--color-text-secondary);
+        opacity: 0.8;
+        transition: opacity 0.2s, color 0.2s;
+        
+        &:hover {
+          opacity: 1;
+          color: var(--color-primary);
+        }
+      }
+    }
+
+    .balance-header {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      align-items: flex-end;
+
+      .balance-label {
+        font-size: 0.875rem;
+        color: var(--color-text-secondary);
+      }
+
+      .balance-value {
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: var(--color-text);
+      }
+    }
+  }
+
+  .wallet-tokens {
+    margin-bottom: 1rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+
+    .tokens-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      padding-bottom: 1rem;
+
+      .tokens-loading,
+      .no-tokens {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem;
+        color: var(--color-text-secondary);
+        gap: 1rem;
+        background-color: var(--color-background-secondary);
+        border-radius: 0.75rem;
+      }
+
+      .token-item {
+        display: flex;
+        align-items: center;
+        padding: 0.75rem;
+        background-color: var(--color-background-secondary);
+        border-radius: 0.75rem;
+        cursor: pointer;
+        transition: background-color 0.2s;
+        position: relative;
+
+        &:hover {
+          background-color: var(--color-background-secondary-hover);
+        }
+
+        .token-icon {
+          width: 2.5rem;
+          height: 2.5rem;
+          border-radius: 50%;
+          margin-right: 0.75rem;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          overflow: hidden;
+          background-color: var(--color-background);
+
+          img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+          }
+
+          .token-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            color: var(--color-text);
+            background-color: var(--color-background);
+          }
+        }
+
+        .token-info {
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+          gap: 0.25rem;
+          min-width: 0;
+
+          .token-name-row {
+            display: flex;
+            align-items: center;
+
+            .token-symbol {
+              font-weight: 600;
+              margin-right: 0.5rem;
+            }
+
+            .token-name {
+              font-size: 0.875rem;
+              color: var(--color-text-secondary);
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
+            }
+          }
+
+          .token-balance-row {
+            display: flex;
+            justify-content: space-between;
+
+            .token-balance {
+              font-size: 0.875rem;
+              color: var(--color-text-secondary);
+            }
+
+            .token-value {
+              font-size: 0.875rem;
+              font-weight: 500;
+            }
+          }
+        }
+
+        .token-menu-button {
+          margin-left: 0.5rem;
+          z-index: 2;
+        }
+      }
+    }
+  }
+
+  .wallet-error {
+    background-color: rgba(var(--color-error-rgb), 0.1);
+    color: var(--color-error);
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+    font-size: 0.875rem;
+  }
+
+  .wallet-success {
+    background-color: rgba(var(--color-success-rgb), 0.1);
+    color: var(--color-text);
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+    font-size: 0.875rem;
+    display: flex;
+    flex-direction: column;
+    
+    a {
+      display: block;
+      margin-top: 0.5rem;
+      color: var(--color-primary);
+      text-decoration: none;
+      
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+.token-context-menu {
+  z-index: 1000;
+}

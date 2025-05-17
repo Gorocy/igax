@@ -1,0 +1,48 @@
+.transaction-confirm-modal {
+  .transaction-confirm-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+    
+    p {
+      margin: 0;
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+    
+    .transaction-details {
+      max-height: 200px;
+      overflow-y: auto;
+      background-color: var(--color-background-secondary);
+      border-radius: 0.5rem;
+      padding: 0.75rem;
+      
+      p {
+        margin: 0;
+        font-family: monospace;
+        font-size: 0.875rem;
+        line-height: 1.4;
+        word-break: break-all;
+        white-space: pre-wrap;
+      }
+    }
+    
+    .transaction-confirm-buttons {
+      display: flex;
+      justify-content: flex-end;
+      gap: 1rem;
+      margin-top: 1rem;
+      
+      .cancel-button {
+        background-color: var(--color-background-secondary);
+        color: var(--color-text-secondary);
+      }
+      
+      .confirm-button {
+        background-color: var(--color-primary);
+        color: var(--color-white);
+      }
+    }
+  }
+}

@@ -1,0 +1,425 @@
+.IgaxTransactionContainer {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  grid-template-areas:
+    "header"
+    "content";
+  width: 100%;
+  max-width: 90vw;
+  min-width: min(320px, 90vw);
+  height: 100%;
+  min-height: 300px;
+  max-height: 90vh;
+  background-color: var(--color-background);
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  overflow: hidden;
+  position: relative;
+
+  // Header styles
+  .igax-header {
+    grid-area: header;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    background-color: var(--color-background-secondary);
+    border-bottom: 1px solid var(--color-borders);
+    z-index: 2;
+
+    .close-button {
+      flex: 0 0 2rem;
+      width: 2rem;
+      height: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .igax-url {
+      flex: 1;
+      text-align: center;
+      font-weight: var(--font-weight-medium);
+      font-size: 1rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      color: var(--color-text);
+      padding: 0 0.5rem;
+    }
+
+    .igax-wallet-status {
+      display: flex;
+      align-items: center;
+      margin-left: auto;
+      flex: 0 0 auto;
+
+      .wallet-connected {
+        display: flex;
+        align-items: center;
+        background-color: var(--color-primary-transparenter);
+        padding: 0.25rem 0.5rem;
+        border-radius: 1rem;
+        gap: 0.375rem;
+
+        .wallet-icon {
+          color: var(--color-primary);
+          font-size: 0.75rem;
+          display: flex;
+          align-items: center;
+        }
+
+        .wallet-address {
+          font-size: 0.75rem;
+          color: var(--color-text);
+          font-family: monospace;
+        }
+      }
+    }
+  }
+
+  // Content styles
+  .igax-content-wrapper {
+    grid-area: content;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    min-height: 200px;
+    padding: 1rem;
+    overflow-y: auto;
+    position: relative;
+
+    .igax-source-selector {
+      width: 100%;
+      margin-bottom: 1.5rem;
+      padding: 0 0.5rem;
+      display: flex;
+      justify-content: center;
+
+      .source-buttons {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        width: clamp(280px, 50vw, 300px);
+        
+        .source-button-container {
+          flex: 1 1 auto;
+          display: flex;
+          height: 2.5rem;
+          overflow: hidden;
+          position: relative;
+          border-radius: var(--default-border-radius, 0.5rem);
+          
+          &::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border: 1px solid var(--color-borders);
+            border-radius: var(--default-border-radius, 0.5rem);
+            pointer-events: none;
+            z-index: 1;
+          }
+          
+          .source-button {
+            flex: 1 1 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            padding: 0 0.5rem;
+            background-color: var(--color-background);
+            color: var(--color-text);
+            font-size: 0.875rem;
+            border: none;
+            position: relative;
+            cursor: pointer;
+            transition: background-color 0.2s ease, color 0.2s ease;
+            margin: 0;
+            
+            &:not(:last-child)::after {
+              content: '';
+              position: absolute;
+              right: 0;
+              top: 15%;
+              bottom: 15%;
+              width: 1px;
+              background-color: var(--color-borders);
+              z-index: 2;
+            }
+            
+            &.active {
+              background-color: var(--color-primary);
+              color: var(--color-white);
+              z-index: 1;
+              
+              &::after,
+              & + .source-button::after {
+                display: none;
+              }
+            }
+            
+            &:hover:not(.active) {
+              background-color: var(--color-background-secondary);
+            }
+            
+            &:focus {
+              outline: none;
+              box-shadow: 0 0 0 2px rgba(var(--color-primary-rgb), 0.2);
+              z-index: 2;
+            }
+          }
+        }
+        
+        .source-button-icon-container {
+          flex: 0 0 auto;
+          display: flex;
+          align-items: center;
+          
+          .source-button-icon {
+            width: 2.5rem;
+            height: 2.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--default-border-radius, 0.5rem);
+            background-color: var(--color-background);
+            color: var(--color-text);
+            transition: background-color 0.2s ease, color 0.2s ease;
+            border: 1px solid var(--color-borders);
+            
+            &:hover {
+              background-color: var(--color-background-secondary);
+            }
+            
+            &:focus {
+              outline: none;
+              box-shadow: 0 0 0 2px rgba(var(--color-primary-rgb), 0.2);
+            }
+          }
+        }
+      }
+    }
+
+    .igax-loading,
+    .igax-error {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      gap: 1rem;
+      text-align: center;
+      padding: 1.5rem;
+
+      .loading-spinner {
+        width: 3rem;
+        height: 3rem;
+      }
+
+      .loading-text,
+      .error-message {
+        color: var(--color-text-secondary);
+        font-size: 1rem;
+        max-width: min(400px, 90%);
+      }
+
+      .error-icon {
+        color: var(--color-danger);
+        font-size: 3rem;
+      }
+    }
+
+    .igax-transactions {
+      display: grid;
+      gap: 1.5rem;
+      width: 100%;
+      align-content: start;
+
+      .transaction-with-domain {
+        display: grid;
+        gap: 1rem;
+        padding-top: 1.5rem;
+        margin-bottom: 1.5rem;
+        border-top: 1px solid var(--color-borders);
+
+        &:first-child {
+          padding-top: 0;
+          border-top: none;
+        }
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+
+        .transaction-domain-header {
+          .domain-label {
+            display: inline-flex;
+            align-items: center;
+            font-size: clamp(0.85rem, 2vw, 0.95rem);
+            font-weight: var(--font-weight-medium);
+            color: var(--color-text-secondary);
+            padding: 0.25rem 0.75rem;
+            background-color: var(--color-background-secondary);
+            border-radius: 1rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Responsive styles
+@media (max-width: 768px) {
+  .IgaxTransactionContainer {
+    max-width: 95vw;
+    max-height: 85vh;
+
+    .igax-content-wrapper {
+      .igax-transactions {
+        gap: 1.25rem;
+
+        .transaction-with-domain {
+          gap: 0.75rem;
+          
+          .transaction-domain-header {
+            .domain-label {
+              padding: 0.2rem 0.65rem;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .IgaxTransactionContainer {
+    max-width: 100vw;
+    max-height: 80vh;
+
+    .igax-header {
+      padding: 0.5rem 0.75rem;
+      gap: 0.375rem;
+
+      .igax-url {
+        font-size: 0.875rem;
+      }
+
+      .wallet-connected {
+        .wallet-address {
+          font-size: 0.7rem;
+        }
+      }
+    }
+
+    .igax-content-wrapper {
+      padding: 0.75rem;
+      gap: 1rem;
+      
+      .igax-source-selector {
+        padding: 0 0.25rem;
+        
+        .source-buttons {
+          width: clamp(260px, 70vw, 280px);
+          
+          .source-button-container {
+            .source-button {
+              padding: 0.5rem 0.25rem;
+              font-size: 0.8rem;
+            }
+          }
+          
+          .source-button-icon-container {
+            margin-left: 0.5rem;
+          }
+        }
+      }
+
+      .igax-transactions {
+        gap: 1rem;
+
+        .transaction-with-domain {
+          gap: 0.5rem;
+          margin-bottom: 1.25rem;
+          padding-top: 0.75rem;
+
+          .transaction-domain-header {
+            .domain-label {
+              font-size: 0.85rem;
+              padding: 0.2rem 0.6rem;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 360px) {
+  .IgaxTransactionContainer {
+    .igax-header {
+      padding: 0.375rem 0.5rem;
+
+      .close-button {
+        width: 1.75rem;
+        height: 1.75rem;
+      }
+
+      .wallet-connected {
+        padding: 0.2rem 0.375rem;
+        gap: 0.25rem;
+
+        .wallet-icon {
+          font-size: 0.675rem;
+        }
+
+        .wallet-address {
+          font-size: 0.65rem;
+        }
+      }
+    }
+
+    .igax-content-wrapper {
+      padding: 0.5rem;
+      
+      .igax-source-selector {
+        .source-buttons {
+          width: clamp(240px, 80vw, 260px);
+          
+          .source-button-container {
+            .source-button {
+              padding: 0.4rem 0.3rem;
+              font-size: 0.75rem;
+            }
+          }
+          
+          .source-button-icon-container {
+            margin-left: 0.4rem;
+            
+            .source-button-icon {
+              width: 2.2rem;
+              height: 2.2rem;
+            }
+          }
+        }
+      }
+
+      .igax-transactions {
+        gap: 0.75rem;
+
+        .transaction-with-domain {
+          gap: 0.5rem;
+          margin-bottom: 1rem;
+          padding-top: 0.6rem;
+
+          .transaction-domain-header {
+            .domain-label {
+              font-size: 0.8rem;
+              padding: 0.15rem 0.5rem;
+            }
+          }
+        }
+      }
+    }
+  }
+}

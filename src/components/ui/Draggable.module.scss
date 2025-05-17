@@ -1,0 +1,55 @@
+.container {
+  position: absolute;
+  width: 100%;
+  z-index: 1;
+
+  &:has(:global(.ListItem-context-menu)) {
+    z-index: 2;
+  }
+}
+
+.isDragging {
+  z-index: 2;
+
+  :global(.drag-item) {
+    pointer-events: none;
+  }
+}
+
+.knob {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 2rem;
+  height: 2rem;
+
+  display: grid;
+  place-items: center;
+
+  color: var(--color-text-secondary);
+  font-size: 1.25rem;
+  line-height: 1.75;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 150ms;
+
+  cursor: grab !important;
+
+  .container:hover & {
+    opacity: 1;
+  }
+
+  .isDragging & {
+    opacity: 1;
+    cursor: grabbing !important;
+  }
+
+  @media (pointer: coarse) {
+    opacity: 1 !important;
+    touch-action: none;
+  }
+}
+
+.icon {
+  font-size: 1.5rem;
+}
